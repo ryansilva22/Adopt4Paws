@@ -1,10 +1,12 @@
 const mysql = require('mysql');
 
+/*Get Usuario */
+
 function getUsuario(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_usuario AS 'Id', nome AS 'Nome', email AS 'email', morada AS 'morada', idade AS 'idade', telefone AS 'telefone', sexo AS 'sexo', nome_usuario AS 'Nome Usuário', senha AS 'senha' FROM usuario";
+    var query = "SELECT id_usuario AS 'Id', nome AS 'Nome', email AS 'email', morada AS 'morada', idade AS 'idade', telefone AS 'telefone', sexo AS 'sexo', nome_usuario AS 'Nome Usuário', senha AS 'senha' FROM usuario where id_usuario = ?";
    
     connection.query(query, function (err, rows) {
         if (err) {
@@ -16,43 +18,124 @@ function getUsuario(req, res) {
 }
 module.exports.getUsuario = getUsuario;
 
+/*Get Animal */
+
 function getAnimal(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raça', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal";
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raça', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where id_animal = ?";
    
     connection.query(query, function (err, rows) {
         if (err) {
             res.json({"message": "error", "error": err });
         } else {
-            res.json({"message": "success", "usuario": rows });
+            res.json({"message": "success", "animal": rows });
         }
     });
 }
 module.exports.getAnimal = getAnimal;
 
+/*Get Organizacao */
+
 function getOrganizacao(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raça', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal";
+    var query = "SELECT id_organizacao AS 'Id', tipo AS 'Tipo', raca AS 'Raça', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM organizacao where id_organizacao = ?";
    
     connection.query(query, function (err, rows) {
         if (err) {
             res.json({"message": "error", "error": err });
         } else {
-            res.json({"message": "success", "usuario": rows });
+            res.json({"message": "success", "organizacao": rows });
         }
     });
 }
 module.exports.getOrganizacao = getOrganizacao;
 
+/*Post Usuario*/
+
 function postUsuario(req,res) {
+    var connection = mysql.createConnection(options);
+    let nome = req.body.nome;
+    let email = req.body.email;
+    let morada = req.body.morada;
+    let idade = req.body.idade;
+    let telefone = req.body.telefone;
+    let sexo = req.body.sexo;
+    let nome_usuario = req.body.nome_usuario;
+    let senha = req.body.senha;
+
+
+        if (nome == undefined , email == undefined , morada == undefined,
+             idade == undefined , telefone == undefined,
+             sexo == undefined , nome_usuario == undefined, senha == undefined) {
+            res.send("Undefined");
+        }
+        else {
+            let sqlquery =  `INSERT INTO usuario(nome, email, morada, idade, telefone, sexo, nome_usuario, senha) values ("${nome}", "${email}", "${morada}", "${idade}", "${telefone}", "${sexo}", "${nome_usuario}",`
+            connection.query(sqlquery, (err, result) => {
+                if (err) throw err;
+                res.send(result);
+            })
+        }
+
+}
+
+module.exports.postUsuario = postUsuario;
+
+/*Post Animal*/
+
+function postAnimal(req,res) {
+    var connection = mysql.createConnection(options);
+    let tipo = req.body.tipo;
+    let raca = req.body.raca;
+    let cor = req.body.cor;
+    let idade = req.body.idade;
+    let sexo = req.body.sexo;
+    let localidade = req.body.localidade;
+    
+        if (tipo== undefined , raca == undefined , cor == undefined,
+            idade == undefined ,sexo == undefined , localidade == undefined) {
+            res.send("Undefined");
+        }
+        else {
+                let sqlquery =  `INSERT INTO animal (tipo,raca,cor,idade,sexo,localidade) values ("${tipo}", "${raca}", "${cor}", "${idade}", "${sexo}", "${localidade}",`
+                connection.query(sqlquery, (err, result) => {
+                    if (err) throw err;
+                    res.send(result);
+                })
+            }
+        };
+
+module.exports.postAnimal = postAnimal;
+
+/*Post Organizacao*/
+
+function postOrganizacao(req,res) {
+
+    var connection = mysql.createConnection(options);
+    let nome = req.body.nome_organizacao;
+    let localidade= req.body.localidade;
+        
+                if (nome == undefined, localidade == undefined) {
+                    res.send("Undefined");
+                }
+                else {
+                    let sqlquery =  `INSERT INTO organizacao (nome,localidade) values ("${nome}", "${localidade}",`
+                    db.query(sqlquery, (err, result) => {
+                        if (err) throw err;
+                        res.send(result);
+                    })
+                }
 
 
 }
 
+module.exports.postOrganizacao = postOrganizacao;
+
+/*Put Usuario */
 
 function putUsuario(req, res) {
     let connection = mysql.createConnection(options);
@@ -81,6 +164,8 @@ function putUsuario(req, res) {
 }
 module.exports.putUsuario = putUsuario;
 
+/*Put Animal */
+
 function putAnimal(req, res) {
     let connection = mysql.createConnection(options);
     let tipo = req.body.tipo;
@@ -106,6 +191,8 @@ function putAnimal(req, res) {
 }
 module.exports.putAnimal = putAnimal;
 
+/*Put Organizacao */
+
 function putOrganizacao(req, res) {
     let connection = mysql.createConnection(options);
     let nome = req.body.nome_organizacao;
@@ -128,6 +215,8 @@ function putOrganizacao(req, res) {
 }
 module.exports.putOrganizacao = putOrganizacao;
 
+/*Delete Usuario */
+
 function deleteUsuario(req, res) {
     let query = 'DELETE FROM usuario WHERE id_usuario = ?';
     let connection = mysql.createConnection(options);
@@ -145,6 +234,8 @@ function deleteUsuario(req, res) {
 
 module.exports.deleteUsuario = deleteUsuario;
 
+/*Delete Animal*/
+
 function deleteAnimal(req, res) {
     let query = 'DELETE FROM animal WHERE id_animal= ?';
     let connection = mysql.createConnection(options);
@@ -161,6 +252,8 @@ function deleteAnimal(req, res) {
 }
 
 module.exports.deleteAnimal = deleteAnimal;
+
+/*Delete Organizacao */
 
 function deleteOrganizacao(req, res) {
     let query = 'DELETE FROM usuario WHERE id_organizacao = ?';
