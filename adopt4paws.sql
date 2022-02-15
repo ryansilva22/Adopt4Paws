@@ -23,9 +23,9 @@ localidade varchar (20) NOT NULL,
 PRIMARY KEY (id_animal)
 );
 
-create table organização(
+create table organizacao(
 id_organizacao int NOT NULL AUTO_INCREMENT,
 nome_organizacao varchar(15) NOT NULL,
-localidade_organizacao varchar(20) NOT NULL,
+localidade varchar(20) NOT NULL,
 PRIMARY KEY (id_organizacao)
 );
