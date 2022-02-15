@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt4Paws</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/scripts.js"></script>
+</head>
+
+<body>
+    <h1 id="titleheader">Adopt4Paws - Ryan Silva / Carlos Carmo</h1>
+    <div id="content">
+        <div>
+            <h2>GET</h2>
+            <input id="getId" placeholder="Id">
+            <button onclick= "getUsuario()">Usuário</button>
+            <button onclick="getAnimal()">Animal</button>
+            <button onclick="getOrganizacao()">Organização</button>
+            <h2>POST</h2>
+            <Label>Adicionar Usuário</Label>
+            <br>
+            <form class="postForm" action="/login" method="POST">
+                <input id="addUsuario_id" placeholder="Id">
+                <input id="addNome_id" placeholder="Nome">
+                <input id="addEmail_id" placeholder="Email">
+                <input id="addMorada_id" placeholder="Morada">
+                <input id="addNascimento_id" placeholder="Data de Nascimento" type="date">
+                <input id="addTelefone_id" placeholder="Telefone">
+                <input id="addSexo_id" placeholder="Gênero">
+                <input id="addNome_usuario_id" placeholder="Nome de Usuário">
+                <input id="addSenha_id" placeholder="Senha">
+                <button type="button" onclick="postUsuario()" >Enviar</button>
+            </form>
+            <br>
+            <Label>Adicionar Animal</Label>
+            <br>
+            <form class="postForm">
+                <input id="addAnimal_id" placeholder="Id">
+                <input id="addTipo_id" placeholder="Tipo">
+                <input id="addRaca_id" placeholder="Raça">
+                <input id="addCor_id" placeholder="Cor">
+                <input id="addIdade_id" placeholder="Idade">
+                <input id="addSexo_id" placeholder="Sexo">
+                <input id="addLocalidade_id" placeholder="Localidade">
+                
+                <button type="button" onclick="postAnimal()" >Enviar</button>
+            </form>
+            <br>
+            <Label>Adicionar Organização</Label>
+            <br>
+            <form class="postForm">
+                
+                <input id="addOrganizacao_id" placeholder="Organização Id" >
+                <input id="addNomeOrganizacao_id" placeholder="Nome Organização" >
+                <input id="addLocalidadeOrganizacao_ID" placeholder="Localidade" >
+                <button type="button" onclick="postOrganização()" >Enviar</button>
+            </form>
+            <br>
+            <!---->
+            <h2>PUT</h2>
+            <Label>Atualizar Usuario</Label>
+            <br>
+            <form class="postForm">
+                <input id="addUsuario_ID" placeholder="Id">
+                <input id="addNome_ID" placeholder="Nome">
+                <input id="addEmail_id" placeholder="Email">
+                <input id="addMorada_id" placeholder="Morada">
+                <input id="addNascimento_id" placeholder="Data de Nascimento" type="date">
+                <input id="addTelefone_id" placeholder="Telefone">
+                <input id="addSexo_id" placeholder="Gênero">
+                <input id="addNome_usuario_id" placeholder="Nome de Usuário">
+                <input id="addSenha_id" placeholder="Senha">
+                <button type="button" onclick="putUsuario()" >Enviar</button>
+            </form>
+            <br>
+            <Label>Atualizar Animal</Label>
+            <br>
+            <form class="postForm">
+                <input id="addAnimal_id" placeholder="Id">
+                <input id="addTipo_id" placeholder="Tipo">
+                <input id="addRaca_id" placeholder="Raça">
+                <input id="addCor_id" placeholder="Cor">
+                <input id="addIdade_id" placeholder="Idade">
+                <input id="addSexo_id" placeholder="Sexo">
+                <input id="addLocalidade_id" placeholder="Localidade">
+                <button type="button" onclick="putAnimal()" >Enviar</button>
+            </form>      
+            <br>
+            <label>Atualizar Organização</label>
+            <br>
+            <form class="postForm">
+                <input id="addOrganizacao_id" placeholder="Organização Id" >
+                <input id="addNomeOrganizacao_id" placeholder="Nome Organização" >
+                <input id="addLocalidadeOrganizacao_ID" placeholder="Localidade" >
+                <button type="button" onclick="putOrganizacao()" >Enviar</button>
+            </form>
+            <h2>DELETE</h2>
+            <input id="deleteId" placeholder="id">
+            <button onclick="deleteUsuario()">Usuario</button>
+            <button onclick="deleteAnimal()">Animal</button>
+            <button onclick="deleteOrganizacao()">Organização</button>
+
+        </div>
+        <div id="result"> </div>
+    </div>
+    <div style="height: 8vh" ></div>
+    <footer>Ryan Silva - 202002433 | Carlos Carmo - 202000733 </footer>
+</body>
+
+</html>
