@@ -29,7 +29,35 @@ db.connect((err) => {
     if(err) throw err;
     console.log('Connected to Database')
 });
+  /*GET */
 
-app.get("/usuario", (req, res) => requestHandlers.getUsuario(req, res)); 
+  app.get("/id_usuario", requestHandlers.getUsuario);
+  
+  app.get("/id_animal", requestHandlers.getAnimal);
 
-app.get("/animal", (req, res) => requestHandlers.getAnimal(req, res)); 
+  app.get("/id_organizacao", requestHandlers.getOrganizacao);
+
+  /*POST */
+
+  app.post("/",requestHandlers.postUsuario);
+
+  app.post("/",requestHandlers.postAnimal);
+
+  app.post("/",requestHandlers.postOrganizacao);
+
+
+  /*PUT */
+
+  app.put("/id_usuario", requestHandlers.putUsuario);
+  
+  app.put("/id_animal", requestHandlers.putAnimal);
+
+  app.put("/id_organizacao", requestHandlers.putOrganizacao);
+
+  /*DELETE */
+ 
+  app.delete("/id_usuario", requestHandlers.deleteUsuario);
+  
+  app.delete("/id_animal", requestHandlers.deleteAnimal);
+
+  app.delete("/id_organizacao", requestHandlers.deleteOrganizacao);
