@@ -42,7 +42,7 @@ function getOrganizacao(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_organizacao AS 'Id', tipo AS 'Tipo', raca AS 'Raça', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM organizacao where id_organizacao = ?";
+    var query = "SELECT id_organizacao AS 'Id', nome_organizacao AS 'nome', localidade AS 'localidade' FROM organizacao where id_organizacao = ?";
    
     connection.query(query, function (err, rows) {
         if (err) {
@@ -256,7 +256,7 @@ module.exports.deleteAnimal = deleteAnimal;
 /*Delete Organizacao */
 
 function deleteOrganizacao(req, res) {
-    let query = 'DELETE FROM usuario WHERE id_organizacao = ?';
+    let query = 'DELETE FROM organizacao WHERE id_organizacao = ?';
     let connection = mysql.createConnection(options);
     connection.connect(function (err) {
         if (err) throw err;
