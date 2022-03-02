@@ -1,3 +1,0 @@
-INSERT INTO usuario( nome, email, morada, idade, telefone, sexo, nome_usuario, senha)VALUES('Ryan Silva', 'ryan@gmail.com', 'Avenida Pedro Nunes', '19','12345','Masculino', 'laceras', '123');
-INSERT INTO animal(tipo,raca,cor,idade,sexo,localidade) VALUES('Cachorro','Pug','Preto','3','Masculino','Montijo');
-INSERT INTO organização( nome_organizacao,localidade_organizacao)VALUES("PetShop","Montijo");
