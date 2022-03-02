@@ -19,89 +19,94 @@
             <button onclick= "getUsuario()">Usuário</button>
             <button onclick="getAnimal()">Animal</button>
             <button onclick="getOrganizacao()">Organização</button>
+            <button onclick="getLogin()">Login</button>
+
+        
             <h2>POST</h2>
             <Label>Adicionar Usuário</Label>
             <br>
             <form class="postForm" action="/login" method="POST">
-                <input id="addUsuario_id" placeholder="Id">
                 <input id="addNome_id" placeholder="Nome">
                 <input id="addEmail_id" placeholder="Email">
                 <input id="addMorada_id" placeholder="Morada">
-                <input id="addNascimento_id" placeholder="Data de Nascimento" type="date">
+                <input id="addIdade_id" placeholder="Idade">
                 <input id="addTelefone_id" placeholder="Telefone">
                 <input id="addSexo_id" placeholder="Gênero">
-                <input id="addNome_usuario_id" placeholder="Nome de Usuário">
+                <input id="addNomeUsuario_id" placeholder="Nome de Usuário">
                 <input id="addSenha_id" placeholder="Senha">
                 <button type="button" onclick="postUsuario()" >Enviar</button>
             </form>
+
             <br>
             <Label>Adicionar Animal</Label>
             <br>
             <form class="postForm">
-                <input id="addAnimal_id" placeholder="Id">
                 <input id="addTipo_id" placeholder="Tipo">
                 <input id="addRaca_id" placeholder="Raça">
                 <input id="addCor_id" placeholder="Cor">
-                <input id="addIdade_id" placeholder="Idade">
-                <input id="addSexo_id" placeholder="Sexo">
+                <input id="addIdadeAnimal_id" placeholder="Idade">
+                <input id="addSexoAnimal_id" placeholder="Sexo">
                 <input id="addLocalidade_id" placeholder="Localidade">
                 
                 <button type="button" onclick="postAnimal()" >Enviar</button>
             </form>
             <br>
+
             <Label>Adicionar Organização</Label>
             <br>
             <form class="postForm">
-                
-                <input id="addOrganizacao_id" placeholder="Organização Id" >
                 <input id="addNomeOrganizacao_id" placeholder="Nome Organização" >
-                <input id="addLocalidadeOrganizacao_ID" placeholder="Localidade" >
-                <button type="button" onclick="postOrganização()" >Enviar</button>
+                <input id="addLocalidadeOrganizacao_id" placeholder="Localidade" >
+                <button type="button" onclick="postOrganizacao()" >Enviar</button>
             </form>
             <br>
+
             <!---->
             <h2>PUT</h2>
             <Label>Atualizar Usuario</Label>
             <br>
-            <form class="postForm">
-                <input id="addUsuario_ID" placeholder="Id">
-                <input id="addNome_ID" placeholder="Nome">
-                <input id="addEmail_id" placeholder="Email">
-                <input id="addMorada_id" placeholder="Morada">
-                <input id="addNascimento_id" placeholder="Data de Nascimento" type="date">
-                <input id="addTelefone_id" placeholder="Telefone">
-                <input id="addSexo_id" placeholder="Gênero">
-                <input id="addNome_usuario_id" placeholder="Nome de Usuário">
-                <input id="addSenha_id" placeholder="Senha">
+            <form class="putForm">
+                <input id="putUsuario_id" placeholder="Id">
+                <input id="putNome_id" placeholder="Nome">
+                <input id="putEmail_id" placeholder="Email">
+                <input id="putMorada_id" placeholder="Morada">
+                <input id="putIdadeid" placeholder="Idade">
+                <input id="putTelefone_id" placeholder="Telefone">
+                <input id="putSexo_id" placeholder="Gênero">
+                <input id="putNomeUsuario_id" placeholder="Nome de Usuário">
+                <input id="putSenha_id" placeholder="Senha">
                 <button type="button" onclick="putUsuario()" >Enviar</button>
             </form>
+
             <br>
             <Label>Atualizar Animal</Label>
             <br>
-            <form class="postForm">
-                <input id="addAnimal_id" placeholder="Id">
-                <input id="addTipo_id" placeholder="Tipo">
-                <input id="addRaca_id" placeholder="Raça">
-                <input id="addCor_id" placeholder="Cor">
-                <input id="addIdade_id" placeholder="Idade">
-                <input id="addSexo_id" placeholder="Sexo">
-                <input id="addLocalidade_id" placeholder="Localidade">
+            <form class="putForm">
+                <input id="putAnimal_id" placeholder="Id">
+                <input id="putTipo_id" placeholder="Tipo">
+                <input id="putRaca_id" placeholder="Raça">
+                <input id="putCor_id" placeholder="Cor">
+                <input id="putIdade_id" placeholder="Idade">
+                <input id="putSexo_id" placeholder="Sexo">
+                <input id="putLocalidade_id" placeholder="Localidade">
                 <button type="button" onclick="putAnimal()" >Enviar</button>
             </form>      
             <br>
             <label>Atualizar Organização</label>
             <br>
-            <form class="postForm">
-                <input id="addOrganizacao_id" placeholder="Organização Id" >
-                <input id="addNomeOrganizacao_id" placeholder="Nome Organização" >
-                <input id="addLocalidadeOrganizacao_ID" placeholder="Localidade" >
+            <form class="putForm">
+                <input id="putOrganizacao_id" placeholder="Organização Id" >
+                <input id="putNomeOrganizacao_id" placeholder="Nome Organização" >
+                <input id="putLocalidadeOrganizacao_ID" placeholder="Localidade" >
                 <button type="button" onclick="putOrganizacao()" >Enviar</button>
             </form>
+            
             <h2>DELETE</h2>
             <input id="deleteId" placeholder="id">
             <button onclick="deleteUsuario()">Usuario</button>
             <button onclick="deleteAnimal()">Animal</button>
             <button onclick="deleteOrganizacao()">Organização</button>
+            <button onclick="deleteLogin()">Login</button>
 
         </div>
         <div id="result"> </div>
