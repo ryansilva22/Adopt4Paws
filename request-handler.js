@@ -1,4 +1,13 @@
+const { json } = require('express/lib/response');
 const mysql = require('mysql');
+require("dotenv").config();
+
+let options = {
+    "host": process.env.host,
+    "user": process.env.user,
+    "database": process.env.database,
+    "password": process.env.password
+}
 
 /*Get Usuario */
 
@@ -6,17 +15,52 @@ function getUsuario(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_usuario AS 'Id', nome AS 'Nome', email AS 'email', morada AS 'morada', idade AS 'idade', telefone AS 'telefone', sexo AS 'sexo', nome_usuario AS 'Nome Usuário', senha AS 'senha' FROM usuario where id_usuario = ?";
+    var query = "SELECT id_usuario AS 'Id', nome AS 'Nome', email AS 'email', morada AS 'morada', idade AS 'idade',telefone AS 'telefone', sexo AS 'sexo', nome_usuario AS 'Nome_Usuario', senha AS 'senha' FROM usuario ";
    
+    if (req.params.id_usuario) {
+        query += "where id_usuario = " + req.params.id_usuario;
+    }
     connection.query(query, function (err, rows) {
         if (err) {
             res.json({"message": "error", "error": err });
         } else {
-            res.json({"message": "success", "usuario": rows });
+            res.json({"message": "success", "usuarios": rows });
         }
     });
 }
 module.exports.getUsuario = getUsuario;
+
+/*Get Usuario ASC */
+
+function getUsuarioAsc(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_usuario AS 'Id', nome AS 'Nome', email AS 'email', morada AS 'morada', idade AS 'idade',telefone AS 'telefone', sexo AS 'sexo', nome_usuario AS 'Nome_Usuario', senha AS 'senha' FROM usuario order by id_usuario ASC";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "usuarios": rows });
+        }
+    });
+}
+module.exports.getUsuarioAsc = getUsuarioAsc;
+
+/* Get Usuario DESC */
+
+function getUsuarioDesc(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_usuario AS 'Id', nome AS 'Nome', email AS 'email', morada AS 'morada', idade AS 'idade',telefone AS 'telefone', sexo AS 'sexo', nome_usuario AS 'Nome_Usuario', senha AS 'senha' FROM usuario order by id_usuario DESC";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "usuarios": rows });
+        }
+    });
+}
+module.exports.getUsuarioDesc = getUsuarioDesc;
 
 /*Get Animal */
 
@@ -24,17 +68,123 @@ function getAnimal(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raça', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where id_animal = ?";
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal ";
    
+    if (req.params.id_animal) {
+        query += "where id_animal = " + req.params.id_animal;
+    }
     connection.query(query, function (err, rows) {
         if (err) {
             res.json({"message": "error", "error": err });
         } else {
-            res.json({"message": "success", "animal": rows });
+            res.json({"message": "success", "animais": rows });
         }
     });
 }
 module.exports.getAnimal = getAnimal;
+
+function getAnimalTipoDog(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where tipo = 'Cachorro' ";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalTipoDog = getAnimalTipoDog;
+
+function getAnimalTipoCat(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where tipo = 'Gato' ";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalTipoCat = getAnimalTipoCat;
+
+
+function getAnimalMenor5anos(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where idade <= 5";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalMenor5anos = getAnimalMenor5anos;
+
+function getAnimalMenor10anos(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where idade <= 10";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalMenor10anos = getAnimalMenor10anos;
+
+function getAnimalMaior10anos(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where idade >= 10";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalMaior10anos = getAnimalMaior10anos;
+
+/*GET Animal Masculino */
+
+function getAnimalMasculino(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where sexo = 'Masculino' ";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalMasculino = getAnimalMasculino;
+
+/*GET Animal Feminino */
+
+function getAnimalFeminino(req, res) {
+    var connection = mysql.createConnection(options);
+    connection.connect();
+    var query = "SELECT id_animal AS 'Id', tipo AS 'Tipo', raca AS 'Raca', cor AS 'Cor', idade AS 'idade', sexo AS 'sexo', localidade AS 'localidade' FROM animal where sexo = 'Feminino' ";
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "animais": rows });
+        }
+    });
+}
+module.exports.getAnimalFeminino = getAnimalFeminino;
 
 /*Get Organizacao */
 
@@ -42,102 +192,49 @@ function getOrganizacao(req, res) {
     var connection = mysql.createConnection(options);
     console.log(options);
     connection.connect();
-    var query = "SELECT id_organizacao AS 'Id', nome_organizacao AS 'nome', localidade AS 'localidade' FROM organizacao where id_organizacao = ?";
+    var query = "SELECT id_organizacao AS 'Id', nome_organizacao as 'Nome', localidade_organizacao AS 'localidade' FROM organização ";
    
+    if (req.params.id_organizacao) {
+        query += "where id_organizacao = " + req.params.id_organizacao;
+    }
     connection.query(query, function (err, rows) {
         if (err) {
             res.json({"message": "error", "error": err });
         } else {
-            res.json({"message": "success", "organizacao": rows });
+            res.json({"message": "success", "organizacoes": rows });
         }
     });
 }
 module.exports.getOrganizacao = getOrganizacao;
 
-/*Post Usuario*/
+/*Get Login */
 
-function postUsuario(req,res) {
+function getLogin(req, res) {
     var connection = mysql.createConnection(options);
-    let nome = req.body.nome;
-    let email = req.body.email;
-    let morada = req.body.morada;
-    let idade = req.body.idade;
-    let telefone = req.body.telefone;
-    let sexo = req.body.sexo;
-    let nome_usuario = req.body.nome_usuario;
-    let senha = req.body.senha;
+    connection.connect();
+    var query = "SELECT id_login AS 'Id', usuario_nome AS 'Nome_Usuario', usuario_senha AS 'Senha', id_Usuario AS 'Id_Usuario' FROM Login_Usuario ";
 
+    if (req.params.id_login) {
+        query += "where id_login = " + req.params.id_login;
+    }
 
-        if (nome == undefined , email == undefined , morada == undefined,
-             idade == undefined , telefone == undefined,
-             sexo == undefined , nome_usuario == undefined, senha == undefined) {
-            res.send("Undefined");
+    connection.query(query, function (err, rows) {
+        if (err) {
+            res.json({ "message": "error", "error": err });
+        } else {
+            res.json({ "message": "success", "logins": rows });
         }
-        else {
-            let sqlquery =  `INSERT INTO usuario(nome, email, morada, idade, telefone, sexo, nome_usuario, senha) values ("${nome}", "${email}", "${morada}", "${idade}", "${telefone}", "${sexo}", "${nome_usuario}",`
-            connection.query(sqlquery, (err, result) => {
-                if (err) throw err;
-                res.send(result);
-            })
-        }
-
+    });
 }
-
-module.exports.postUsuario = postUsuario;
-
-/*Post Animal*/
-
-function postAnimal(req,res) {
-    var connection = mysql.createConnection(options);
-    let tipo = req.body.tipo;
-    let raca = req.body.raca;
-    let cor = req.body.cor;
-    let idade = req.body.idade;
-    let sexo = req.body.sexo;
-    let localidade = req.body.localidade;
-    
-        if (tipo== undefined , raca == undefined , cor == undefined,
-            idade == undefined ,sexo == undefined , localidade == undefined) {
-            res.send("Undefined");
-        }
-        else {
-                let sqlquery =  `INSERT INTO animal (tipo,raca,cor,idade,sexo,localidade) values ("${tipo}", "${raca}", "${cor}", "${idade}", "${sexo}", "${localidade}",`
-                connection.query(sqlquery, (err, result) => {
-                    if (err) throw err;
-                    res.send(result);
-                })
-            }
-        };
-
-module.exports.postAnimal = postAnimal;
-
-/*Post Organizacao*/
-
-function postOrganizacao(req,res) {
-
-    var connection = mysql.createConnection(options);
-    let nome = req.body.nome_organizacao;
-    let localidade= req.body.localidade;
-        
-                if (nome == undefined, localidade == undefined) {
-                    res.send("Undefined");
-                }
-                else {
-                    let sqlquery =  `INSERT INTO organizacao (nome,localidade) values ("${nome}", "${localidade}",`
-                    db.query(sqlquery, (err, result) => {
-                        if (err) throw err;
-                        res.send(result);
-                    })
-                }
+module.exports.getLogin = getLogin;
 
 
-}
-
-module.exports.postOrganizacao = postOrganizacao;
 
 /*Put Usuario */
 
 function putUsuario(req, res) {
+
+    let id_usuario = req.body.id_usuario;
     let connection = mysql.createConnection(options);
     let nome = req.body.nome;
     let email = req.body.email;
@@ -148,14 +245,15 @@ function putUsuario(req, res) {
     let nome_usuario = req.body.nome_usuario;
     let senha = req.body.senha;
 
-    let sql = "UPDATE usuario SET nome= ?,email= ?,morada= ?,idade= ?,telefone= ?,sexo= ?,nome_usuario= ?, senha=?, WHERE id_usuario= ?"; 
+    let sql = "UPDATE `usuario` SET `nome`= ?,`email`= ?,`morada`= ?,`idade`= ?,`telefone`= ?,`sexo`= ?,`nome_usuario`= ?, `senha`=?, WHERE `id_usuario`= ?"; 
+    
     connection.connect(function (err) {
         if (err) throw err;
-        connection.query(sql, [nome, email, morada, idade, telefone, sexo, nome_usuario,,senha, req.params.id_usuario], function (err, rows) {
+        connection.query(sql, [nome, email, morada, idade, telefone, sexo, nome_usuario,senha, id_usuario], function (err, rows) {
             if (err) {
                 res.sendStatus(500);
             } else {
-                connection.query("Select id_usuario, email, morada, idade, telefone, sexo, nome_usuario, senha FROM Usuario where id_usuario = ?", [req.params.id_usuario], (err, result) => {
+                connection.query("Select `id_usuario`, `email`, `morada`, `idade`, `telefone`, `sexo`, `nome_usuario`, `senha` FROM `usuario` where `id_usuario` = ?", [req.params.id_usuario], (err, result) => {
                     res.send(result)
                 })
             }
@@ -199,14 +297,14 @@ function putOrganizacao(req, res) {
     let localidade= req.body.localidade;
 
 
-    let sql = "UPDATE organizacao SET nome= ?, localidade =?, WHERE id_organizacao= ?"; 
+    let sql = "UPDATE organizacao SET nome_organizacao= ?, localidade_organizacao =?, WHERE id_organizacao= ?"; 
     connection.connect(function (err) {
         if (err) throw err;
         connection.query(sql, [nome,localidade, req.params.id_organizacao], function (err, rows) {
             if (err) {
                 res.sendStatus(500);
             } else {
-                connection.query("Select id_organizacao,nome, localidade FROM Usuario where id_organizacao = ?", [req.params.id_organizacao], (err, result) => {
+                connection.query("Select id_organizacao,nome_organizacao, localidade_organizacao FROM Usuario where id_organizacao = ?", [req.params.id_organizacao], (err, result) => {
                     res.send(result)
                 })
             }
@@ -224,9 +322,9 @@ function deleteUsuario(req, res) {
         if (err) throw err;
         connection.query(query, [req.params.id_usuario], function (err) {
             if (err) {
-                res.sendStatus(404);
+                res.json({"message": "error", err});
             } else {
-                res.sendStatus(200);
+                res.json({"message": "Sucesso", err});
             }
         });
     });
@@ -243,9 +341,9 @@ function deleteAnimal(req, res) {
         if (err) throw err;
         connection.query(query, [req.params.id_animal], function (err) {
             if (err) {
-                res.sendStatus(404);
+                res.json({"message": "error", err});
             } else {
-                res.sendStatus(200);
+                res.json({"message": "Sucesso", err});
             }
         });
     });
@@ -256,18 +354,38 @@ module.exports.deleteAnimal = deleteAnimal;
 /*Delete Organizacao */
 
 function deleteOrganizacao(req, res) {
-    let query = 'DELETE FROM organizacao WHERE id_organizacao = ?';
+    
+    let query = 'DELETE FROM organização WHERE id_organizacao = ?';
     let connection = mysql.createConnection(options);
     connection.connect(function (err) {
         if (err) throw err;
         connection.query(query, [req.params.id_organizacao], function (err) {
             if (err) {
-                res.sendStatus(404);
+                res.json({"message": "error", err});
             } else {
-                res.sendStatus(200);
+                res.json({"message": "Sucesso", err});
             }
         });
     });
 }
 
 module.exports.deleteOrganizacao = deleteOrganizacao;
+
+/*Delete Login */
+
+function deleteLogin(req, res) {
+    let query = 'DELETE FROM Login_Usuario WHERE id_login = ?';
+    let connection = mysql.createConnection(options);
+    connection.connect(function (err) {
+        if (err) throw err;
+        connection.query(query, [req.params.id_login], function (err) {
+            if (err) {
+                res.json({"message": "error", err});
+            } else {
+                res.json({"message": "Sucesso", err});
+            }
+        });
+    });
+}
+
+module.exports.deleteLogin = deleteLogin;
